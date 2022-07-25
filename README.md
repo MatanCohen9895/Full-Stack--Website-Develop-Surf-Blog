@@ -5,11 +5,12 @@ The website allows you to look at information and look at a photo gallery as wel
 Implemented using IntelliJ IDEA tool and XAMPP which is based on SQL/HTML /PHP/JavaScript/ jQuery /Ajax.
 
 
-![image](https://user-images.githubusercontent.com/70447976/155598496-4008147f-6f33-454d-88c2-40c5d02d92b0.png)
+![2](https://user-images.githubusercontent.com/108890711/180784478-9294cc36-3360-4731-9201-b75079b09bd7.jpg)
 
-![image](https://user-images.githubusercontent.com/70447976/155598473-0938735f-7418-4432-8497-c3d6e9a344dd.png)
 
 ![image](https://user-images.githubusercontent.com/70447976/155598839-3e4b3084-8c30-44ac-9b1d-04df23bcffcf.png)
 
 ![image](https://user-images.githubusercontent.com/70447976/155598904-bd508c2c-e0af-44f7-9c3e-5e9a01c83d20.png)
 
+![4](https://user-images.githubusercontent.com/108890711/180784536-b11c6802-b802-41af-a8ae-db63786a1c48.jpg)
+![5](https://user-images.githubusercontent.com/108890711/180784544-13c1962f-de6e-4d06-9dab-1d21bbf2acb4.jpg)
