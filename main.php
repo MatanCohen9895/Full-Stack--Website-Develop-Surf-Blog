@@ -1,7 +1,9 @@
 <?php
 session_start();
+error_reporting(0);
+error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
 if(!isset($_SESSION["user"])){
-	Header("Location: index.php");
+	header("location:index.php");
 }
 $user=$_SESSION["user"];
 $user_id=$_SESSION["user_id"];
@@ -10,7 +12,6 @@ $user_id=$_SESSION["user_id"];
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Chat -->
     <title>Surfers Chat</title>
     <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,8 +19,8 @@ $user_id=$_SESSION["user_id"];
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
-<body>
-<!-- Nav Bar -->
+<body onload="myFunction()">
+
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -30,7 +31,7 @@ $user_id=$_SESSION["user_id"];
         </ul>
     </div>
 </nav>
-<!-- Account info -->
+
 <div class="container">
     <div class="row" id="page" hidden>
         <div class="col-md-3">
@@ -58,7 +59,6 @@ $user_id=$_SESSION["user_id"];
                 </div>
             </div>
         </div>
-		<!--Chat box -->
         <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -71,7 +71,6 @@ $user_id=$_SESSION["user_id"];
                     </ul>
                 </div>
             </div>
-			<!--Send message button -->
                 <div class="input-group">
                     <input id="msg" type="text" class="form-control" name="msg" placeholder="Write your message here...">
                     <span class="input-group-addon"><button id="send_post">Send</button></span>
@@ -80,6 +79,7 @@ $user_id=$_SESSION["user_id"];
     </div>
 </div>
 <script>
+
 	$("#page").slideDown("slow");
 	
 	$("#logout").click(function(){
@@ -89,18 +89,16 @@ $user_id=$_SESSION["user_id"];
 	
 		$("#send_post").click(function(){
 		$.post("api.php",{"action":"new_post","data":$("#msg").val()},function(data){
-			if(data.success == "true"){
 				location.reload();
-			}
 		});
 	});
-
+	
+function myFunction(){
 		$.post("api.php",{"action":"get_all_post"},function(data){
-			if(data.success == "true"){
-			$("#post_history").html(data.data);
-			}
+        $("#post_history").html(data);
 		});
-
+		
+}
 </script>
 </body>
 </html>

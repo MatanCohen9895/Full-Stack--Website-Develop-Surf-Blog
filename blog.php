@@ -1,18 +1,19 @@
 <?php
 session_start();
+error_reporting(0);
+error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
 if(!isset($_SESSION["user"])){
-	Header("Location: connect.php");
+	header("location:index.php");
 }
 $user=$_SESSION["user"];
 $user_id=$_SESSION["user_id"];
 ?>
 
 
-
 <!DOCTYPE html>
 <html>
 <head>
-<title>Ori Blog</title>
+<title>Matan & Ori Surf-Blog</title>
  <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -37,22 +38,25 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <li class="active"><a href="#">Home</a></li>
       <li><a href="main.php">Chat </a></li>
       <li><a href="PhotoGallery.php">Photo Gallery</a></li>
+	  <li><a href="upload_page.php">Upload Photo</a></li>
+	  <li><a href="contactus.php">Contact Us</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#" id="login_register"><span class="glyphicon glyphicon-user"></span>  Welcome <?php echo $_SESSION["user"]; ?> </a></li>
-      <li><a href="#" id="logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a id="login_register"><span class="glyphicon glyphicon-user"></span>  Welcome <?php echo $_SESSION["user"]; ?> </a></li>
+      <li><a href="index.php" id="logout" name="logut"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
 </nav>
 
 
-
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
 <div class="w3-content" style="max-width:1400px">
 
 <!-- Header -->
 <header class="w3-container w3-center w3-padding-32"> 
-  <h1><b>Ori's Surf Blog</b></h1>
-  <p>Welcome to the blog of <span class="w3-tag">Ori Ashkenazi</span></p>
+  <h1><b>Matan & Ori Surf-Blog</b></h1>
+  <p>Welcome to the blog of <span class="w3-tag">Ori Ashkenazi and Matan Cohen</span></p>
 </header>
 
 
@@ -81,6 +85,31 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <div class="w3-row">
         <div class="w3-col m8 s12">
           <p><a class="w3-button w3-padding-large w3-white w3-border" href="https://www.redbull.com/au-en/position-yourself-and-stand-up-on-a-surfboard"><b>READ MORE »</b></a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  
+    <!-- Blog entry -->
+  <div class="w3-card-4 w3-margin w3-white">
+    <img src="images/surfing-injuries-thesurferspot-com.jpg" alt="surflesson" style="width:100%">
+    <div class="w3-container">
+      <h3><b>Surf Injuries</b></h3>
+      <h5>Common surfing injuries.</h5> <span class="w3-opacity">Reviewed on: 31-08-2014</span>
+    </div>
+
+    <div class="w3-container">
+      <p>“Surfers most often sustain injuries to the leg, the head and face, the back, and the shoulder and arm.”</p>
+	  <div class="input-group">
+	               
+                    <input id="msg3" type="text" class="form-control" name="msg3" placeholder="Write your message here...">
+                    <span class="input-group-addon"><button id="send_comment3">Send</button></span>
+			
+       </div>
+      <div class="w3-row">
+        <div class="w3-col m8 s12">
+          <p><a class="w3-button w3-padding-large w3-white w3-border" href="https://www.betterhealth.vic.gov.au/health/healthyliving/surfing-preventing-injury"><b>READ MORE »</b></a></p>
         </div>
       </div>
     </div>
@@ -119,8 +148,8 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <div class="w3-card w3-margin w3-margin-top">
   <img src="images/4.png" alt="oriicon" style="width:20%">
     <div class="w3-container w3-white">
-      <h4><b>About me</b></h4>
-      <p>I wanted to tell a little about myself, All my life I have loved technology and surfing. I am 25 years old curious and energetic to develop in the field of technology and in addition to maintaining a good attitude and fitness I often do sports focusing on stability, surfing, yoga, and all things related to the sea and our core muscles.</p>
+      <h4><b>About Us</b></h4>
+      <p>Matan and I have always loved the sea and the world of surfing, as part of an integrative workshop course in software we decided to combine the two mysteries of surfing and programming and open this blog in front of you.</p>
     </div>
   </div><hr>
   
@@ -156,6 +185,7 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 <!-- END GRID -->
 </div><br>
 
+<!-- END w3-content -->
 </div>
 
 <!--Scripts -->
@@ -166,7 +196,6 @@ $("#page").slideDown("slow");
 $("#logout").click(function(){
 		$.post("api.php",{"action":"logout"},function(data){
 			if(data.success == "true"){
-			location.href = "index.php";
 			}
 		});
 	});
@@ -174,25 +203,24 @@ $("#logout").click(function(){
 	
 		$("#send_comment1").click(function(){
 		$.post("api.php",{"action":"new_comment","data":$("#msg1").val()},function(data){
-			if(data.success == "true"){
 			location.reload();
-				
-			}
 		});
 	});
 	
 		$("#send_comment2").click(function(){
 		$.post("api.php",{"action":"new_comment","data":$("#msg2").val()},function(data){
-			if(data.success == "true"){
 				location.reload();
-			}
+		});
+	});
+	
+		$("#send_comment3").click(function(){
+		$.post("api.php",{"action":"new_comment","data":$("#msg3").val()},function(data){
+				location.reload();
 		});
 	});
 
 		$.post("api.php",{"action":"get_all_comments"},function(data){
-			if(data.success == "true"){
-			$("#comments_history").html(data.data);
-			}
+			$("#comments_history").html(data);
 		});
 		
 		

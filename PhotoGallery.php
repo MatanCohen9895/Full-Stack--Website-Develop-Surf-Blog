@@ -1,4 +1,4 @@
-<!-- Surfer Galley Page By Ori Ashkenazi -->
+
 <!DOCTYPE html>
 <html>
 <title>SurfersGallery</title>

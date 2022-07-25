@@ -1,12 +1,14 @@
 <?php
 
 session_start();
+error_reporting(0);
+error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
 if(isset($_SESSION["user"])){
   Header("Location: blog.php");
 }else{
-$MySQLdb = new PDO("mysql:host=127.0.0.1;dbname=blog", "root", "");
+$MySQLdb = new PDO("mysql:host=localhost;dbname=id18960860_blog_db", "id18960860_blog", "8a+1UL/$>oj@1#WY");
 $MySQLdb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//Register
+
 if(isset($_POST['r_username']) && isset($_POST['r_password'])){
 	
 		$cursor = $MySQLdb->prepare("SELECT * FROM users WHERE username=:username");
@@ -19,7 +21,6 @@ if(isset($_POST['r_username']) && isset($_POST['r_password'])){
 			$cursor->execute(array(":username"=>$_POST["r_username"], ":password"=>$_POST["r_password"]));
 			$msg = "registered succesfully!!";
 		}
-//Login
 }else if(isset($_POST['l_username']) && isset($_POST['l_password'])){
 	
 	 $cursor = $MySQLdb->prepare("SELECT * FROM users WHERE username=:username AND password=:password");
@@ -49,7 +50,7 @@ if(isset($_POST['r_username']) && isset($_POST['r_password'])){
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<!--Title -->
+
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
@@ -62,12 +63,12 @@ if(isset($_POST['r_username']) && isset($_POST['r_password'])){
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-info">
-			<!--Login/Register Box -->
                 <div class="panel-heading">Login/Register
 
                 </div>
-					<!--Login Box -->
                 <div class="panel-body" id="login-panel">
+				<img src="images/Surf-Blogs.jpeg" class="img-rounded" alt="opening_surf" style="width:100%">
+				<br><br>
                     <form action="#" method="POST">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -90,8 +91,9 @@ if(isset($_POST['r_username']) && isset($_POST['r_password'])){
 						?>
                     </form>
                 </div>
-				<!--Register Box -->
                 <div class="panel-body" id="register-panel" hidden>
+				<img src="images/Surf-Blogs.jpeg" class="img-rounded" alt="opening_surf" style="width:100%">
+				<br><br>
                     <form action="index.php" method="POST">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -108,6 +110,10 @@ if(isset($_POST['r_username']) && isset($_POST['r_password'])){
                     </form>
                 </div>
             </div>
+			<h3><span class="label label-default">Desinged by: Matan Cohen - 315823179  &&  Ori Ashkenazi - 205389414</span></h3>
+			<h3><span class="label label-default">Phones: 0532840888  &&  0523878716</span></h3>
+			<h3><span class="label label-default">Emails: matan.cohen9895@gmail.com &&  oriash94@gmail.com</span></h3>
+			
         </div>
     </div>
 </div>
